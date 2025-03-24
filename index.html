@@ -1,20 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>My test page</title>
-  </head>
-  <body>
-      <h1>Enter Keyword Phrase</h1>
-      <form id="searchForm">
-          <label for="keyword">Keyword:</label>
-          <input type="text" id="keyword" name="keyword" placeholder="Type your keyword here">
-          <button type="submit">Search</button>
-      </form>
+<head>
+    <meta charset="UTF-8">
+    <title>Google Search with JSON download option</title>
+    <style>
+        body 
+        {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
-      <script async src="https://cse.google.com/cse.js?cx=f38b442b00b3d4c7d">
-      </script>
-      <div class="gcse-search"></div>
+        .download-section 
+        {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Google Search with JSON download option</h1>
 
-  </body>
+    <!-- Hidden button to download JSON -->
+    <div class="download-section">
+        <button id="downloadBtn" style="display: none;">Download JSON Results</button>
+    </div>
+
+    <!-- Embedded Google CSE widget for search display -->
+    <script async src="https://cse.google.com/cse.js?cx=f38b442b00b3d4c7d"></script>
+    <div class="gcse-search"></div>
+
+    <!-- Define global variables -->
+    <script>
+        window.apiKey = 'AIzaSyA5m4rJJuyqrpEKF1fGnSLKWqnIZsCQ_EU';
+        window.cx = 'f38b442b00b3d4c7d';
+        window.searchResults = null;
+    </script>
+
+    <script src="search.js"></script>
+
+    <script src="cseCallback.js"></script>
+
+    <script>
+        document.getElementById('downloadBtn').addEventListener('click', () =>
+        {
+            if (!window.searchResults)
+            {
+                alert("No results available for download.");
+                return;
+            }
+            downloadJSON(window.searchResults);
+        });
+    </script>
+</body>
 </html>
