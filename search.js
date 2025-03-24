@@ -1,12 +1,5 @@
 // search.js
 
-/**
- * Fetches search results from the Google Custom Search JSON API.
- * @param {string} query - The keyword to search for.
- * @param {string} apiKey - Your Google API key.
- * @param {string} cx - Your Custom Search Engine ID.
- * @returns {Promise<Object>} A promise that resolves with the JSON response.
- */
 function fetchResults(query, apiKey, cx)
 {
     const apiUrl = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&q=${encodeURIComponent(query)}`;

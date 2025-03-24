@@ -8,7 +8,6 @@ describe("fetchResults", function ()
             {
                 console.log("Promise resolved. Data received:", data);
                 expect(data).toBeDefined();
-                // You can add additional expectations here if needed.
                 done();
             })
             .catch(error =>
@@ -20,13 +19,17 @@ describe("fetchResults", function ()
     });
 });
 
-describe("downloadJSON", function () {
-    it("should create an anchor element with correct attributes and trigger a click", function () {
+describe("downloadJSON", function ()
+{
+    it("should create an anchor element with correct attributes and trigger a click", function ()
+    {
         // Store the original createElement function.
         const originalCreateElement = document.createElement;
 
-        spyOn(document, 'createElement').and.callFake(function (tagName) {
-            if (tagName === 'a') {
+        spyOn(document, 'createElement').and.callFake(function (tagName)
+        {
+            if (tagName === 'a')
+            {
                 const realAnchor = originalCreateElement.call(document, 'a');
                 spyOn(realAnchor, 'click').and.callThrough();
                 return realAnchor;
