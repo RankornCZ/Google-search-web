@@ -3,7 +3,7 @@ describe("fetchResults", function ()
     it("should return a valid response object", function (done)
     {
         console.log("Starting test: calling fetchResults");
-        fetchResults("lednice", "AIzaSyA5m4rJJuyqrpEKF1fGnSLKWqnIZsCQ_EU", "f38b442b00b3d4c7d")
+        fetchResults("lednice", "", "") //Add credentials here
             .then(data =>
             {
                 console.log("Promise resolved. Data received:", data);

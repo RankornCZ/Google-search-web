@@ -10,19 +10,44 @@
             margin: 20px;
         }
 
-        .download-section 
-        {
+        .download-section {
             margin-top: 20px;
         }
+
+        .credentials-bar {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+
+            .credentials-bar label {
+                margin-right: 5px;
+            }
+
+            .credentials-bar input {
+                margin-right: 15px;
+                padding: 5px;
+            }
     </style>
 </head>
 <body>
     <h1>Google Search with JSON download option</h1>
 
+    <!-- Credentials bar for API Key and CSE ID -->
+    <div class="credentials-bar">
+        <label for="apikey">API Key:</label>
+        <input type="text" id="apikey" placeholder="Enter your API key">
+        <label for="cseid">CSE ID:</label>
+        <input type="text" id="cseid" placeholder="Enter your CSE ID">
+        <button id="setCredentials">Set Credentials</button>
+    </div>
+    
     <!-- Hidden button to download JSON -->
     <div class="download-section">
         <button id="downloadBtn" style="display: none;">Download JSON Results</button>
     </div>
+
 
     <!-- Embedded Google CSE widget for search display -->
     <script async src="https://cse.google.com/cse.js?cx=f38b442b00b3d4c7d"></script>
@@ -30,9 +55,19 @@
 
     <!-- Define global variables -->
     <script>
-        window.apiKey = 'AIzaSyA5m4rJJuyqrpEKF1fGnSLKWqnIZsCQ_EU';
-        window.cx = 'f38b442b00b3d4c7d';
-        window.searchResults = null;
+
+        document.getElementById('setCredentials').addEventListener('click', function () {
+            var apiKeyInput = document.getElementById('apikey').value.trim();
+            var cseidInput = document.getElementById('cseid').value.trim();
+
+            if (!apiKeyInput || !cseidInput) {
+                alert("Please enter both API Key and CSE ID.");
+                return;
+            }
+
+            window.apiKey = apiKeyInput;
+            window.cx = cseidInput;
+            window.searchResults = null;
     </script>
 
     <script src="search.js"></script>
@@ -40,10 +75,8 @@
     <script src="cseCallback.js"></script>
 
     <script>
-        document.getElementById('downloadBtn').addEventListener('click', () =>
-        {
-            if (!window.searchResults)
-            {
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            if (!window.searchResults) {
                 alert("No results available for download.");
                 return;
             }
