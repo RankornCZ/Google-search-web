@@ -42,20 +42,29 @@
         <input type="text" id="cseid" placeholder="Enter your CSE ID">
         <button id="setCredentials">Set Credentials</button>
     </div>
-    
+
     <!-- Hidden button to download JSON -->
     <div class="download-section">
         <button id="downloadBtn" style="display: none;">Download JSON Results</button>
     </div>
 
 
-    <!-- Embedded Google CSE widget for search display -->
-    <script async src="https://cse.google.com/cse.js?cx=f38b442b00b3d4c7d"></script>
-    <div class="gcse-search"></div>
 
     <!-- Define global variables -->
     <script>
+        // Defaults (you can leave them blank or fill with placeholders)
+        window.apiKey = '';
+        window.cx = '';
+        window.searchResults = null;
+    </script>
 
+    <script src="search.js"></script>
+
+    <script src="cseCallback.js"></script>
+
+
+    <!-- Script to handle credential input -->
+    <script>
         document.getElementById('setCredentials').addEventListener('click', function () {
             var apiKeyInput = document.getElementById('apikey').value.trim();
             var cseidInput = document.getElementById('cseid').value.trim();
@@ -68,11 +77,26 @@
             window.apiKey = apiKeyInput;
             window.cx = cseidInput;
             window.searchResults = null;
+
+            console.log("API Key:", window.apiKey);
+            console.log("CSE ID:", window.cx);
+
+            // Dynamically create the script element for the CSE widget
+            var script = document.createElement("script");
+            script.id = "cseScript";
+            script.async = true;
+            script.src = "https://cse.google.com/cse.js?cx=" + window.cx;
+            document.head.appendChild(script);
+
+            alert("Credentials set and search widget updated!");
+
+        });
     </script>
 
-    <script src="search.js"></script>
 
-    <script src="cseCallback.js"></script>
+    <!-- Embedded Google CSE widget for search display -->
+    <div class="gcse-search"></div>
+
 
     <script>
         document.getElementById('downloadBtn').addEventListener('click', () => {
